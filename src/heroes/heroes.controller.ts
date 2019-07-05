@@ -10,44 +10,45 @@ export class HeroesController {
     @Get('/')
     async getHeroes(@Res() res){
         const heroes = await this.heroesService.getHeroes();
+        res.header("Access-Control-Allow-Origin","*");
         return res.status(HttpStatus.OK).json({
-            heroes
+                heroes
         })
     }
 
     @Get('/:id')
     async getHeroe(@Res() res ,@Param('id') id : number){
         const heroe = await this.heroesService.getHeroe(id);
+        res.header("Access-Control-Allow-Origin","*");
         res.status(HttpStatus.OK).json({
-            mensaje : 'heroe enviado',
-            valor : heroe
+            heroe
         })
     }
 
     @Post('/create')
     async createHeroe(@Res() res,@Body() heroeDto : HeroeDto){
-        const hero =await this.heroesService.createHeroe(heroeDto);
+        const heroe =await this.heroesService.createHeroe(heroeDto);
+        res.header("Access-Control-Allow-Origin","*");
         res.status(HttpStatus.OK).json({
-            mensaje : 'se creo un heroe',
-            valor : hero
+            heroe
         })
     }
 
     @Delete('/delete')
     async deleteHeroe(@Res()res , @Query('heroeId') id : number ){
         const heroe = await this.heroesService.deleteHeroe(id);
+        res.header("Access-Control-Allow-Origin","*");
         res.status(HttpStatus.OK).json({
-            mensaje : 'heroe eliminado',
-            valor : heroe
+            heroe
         })
     }
 
     @Put('/update')
     async updateHero(@Res() res ,@Body() heroDto : HeroeDto , @Query('heroeId') id : number){
-        const hero = await this.heroesService.updateProduct(id,heroDto);
+        const heroe = await this.heroesService.updateProduct(id,heroDto);
+        res.header("Access-Control-Allow-Origin","*");
         res.status(HttpStatus.OK).json({
-            mensaje : 'se actualizo',
-            valor : hero
+            heroe
         })
     }
 
